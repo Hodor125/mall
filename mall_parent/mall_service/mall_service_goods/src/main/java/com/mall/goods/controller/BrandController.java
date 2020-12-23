@@ -5,6 +5,7 @@ import com.mall.entity.PageResult;
 import com.mall.entity.Result;
 import com.mall.entity.StatusCode;
 import com.mall.goods.service.BrandService;
+import com.mall.pojo.Album;
 import com.mall.pojo.Brand;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -65,4 +66,5 @@ public class BrandController {
         PageResult pageResult = new PageResult(page.getTotal(), page.getResult());
         return new Result(true, StatusCode.OK, "分页查询成功", pageResult);
     }
+
 }
