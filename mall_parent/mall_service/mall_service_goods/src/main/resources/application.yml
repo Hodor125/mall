@@ -28,3 +28,6 @@ hystrix:
           enabled: true
         isolation:
           strategy: SEMAPHORE
+mybatis:
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
