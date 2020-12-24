@@ -2,73 +2,133 @@ package com.mall.goods.service.impl;
 
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
-import com.mall.entity.Result;
-import com.mall.entity.StatusCode;
 import com.mall.goods.dao.AlbumMapper;
-import com.mall.goods.dao.BrandMapper;
 import com.mall.goods.service.AlbumService;
 import com.mall.pojo.Album;
-import com.netflix.discovery.converters.Auto;
-import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import tk.mybatis.mapper.entity.Example;
 
 import java.util.List;
+import java.util.Map;
 
-/**
- * @author ：hodor007
- * @date ：Created in 2020/12/23
- * @description ：
- * @version: 1.0
- */
 @Service
 public class AlbumServiceImpl implements AlbumService {
+
     @Autowired
     private AlbumMapper albumMapper;
 
-
+    /**
+     * 查询全部列表
+     * @return
+     */
     @Override
     public List<Album> findAll() {
         return albumMapper.selectAll();
     }
 
+    /**
+     * 根据ID查询
+     * @param id
+     * @return
+     */
     @Override
-    public Album findById(Integer id) {
-        return albumMapper.selectByPrimaryKey(id);
+    public Album findById(Long id){
+        return  albumMapper.selectByPrimaryKey(id);
     }
 
+
+    /**
+     * 增加
+     * @param album
+     */
     @Override
-    public Integer add(Album album) {
-        return albumMapper.insertSelective(album);
+    public void add(Album album){
+        albumMapper.insert(album);
     }
 
+
+    /**
+     * 修改
+     * @param album
+     */
     @Override
-    public Integer delete(Integer id) {
-        return albumMapper.deleteByPrimaryKey(id);
+    public void update(Album album){
+        albumMapper.updateByPrimaryKey(album);
     }
 
+    /**
+     * 删除
+     * @param id
+     */
     @Override
-    public Integer update(Album album) {
-        return albumMapper.updateByPrimaryKey(album);
+    public void delete(Long id){
+        albumMapper.deleteByPrimaryKey(id);
     }
 
-    //泛型可以不写
-    @Override
-    public Page searchAlbum(String name, Integer pageNo, Integer pageSize) {
-        //使用分页器进行分页
-        PageHelper.startPage(pageNo, pageSize);
 
-        //创建查询对象
-        Example example = new Example(Album.class);
+    /**
+     * 条件查询
+     * @param searchMap
+     * @return
+     */
+    @Override
+    public List<Album> findList(Map<String, Object> searchMap){
+        Example example = createExample(searchMap);
+        return albumMapper.selectByExample(example);
+    }
+
+    /**
+     * 分页查询
+     * @param page
+     * @param size
+     * @return
+     */
+    @Override
+    public Page<Album> findPage(int page, int size){
+        PageHelper.startPage(page,size);
+        return (Page<Album>)albumMapper.selectAll();
+    }
+
+    /**
+     * 条件+分页查询
+     * @param searchMap 查询条件
+     * @param page 页码
+     * @param size 页大小
+     * @return 分页结果
+     */
+    @Override
+    public Page<Album> findPage(Map<String,Object> searchMap, int page, int size){
+        PageHelper.startPage(page,size);
+        Example example = createExample(searchMap);
+        return (Page<Album>)albumMapper.selectByExample(example);
+    }
+
+    /**
+     * 构建查询对象
+     * @param searchMap
+     * @return
+     */
+    private Example createExample(Map<String, Object> searchMap){
+        Example example=new Example(Album.class);
         Example.Criteria criteria = example.createCriteria();
-        if (!StringUtils.isEmpty(name)) {
-            criteria.andLike("title", "%" + name + "%");
+        if(searchMap!=null){
+            // 相册名称
+            if(searchMap.get("title")!=null && !"".equals(searchMap.get("title"))){
+                criteria.andLike("title","%"+searchMap.get("title")+"%");
+           	}
+            // 相册封面
+            if(searchMap.get("image")!=null && !"".equals(searchMap.get("image"))){
+                criteria.andLike("image","%"+searchMap.get("image")+"%");
+           	}
+            // 图片列表
+            if(searchMap.get("image_items")!=null && !"".equals(searchMap.get("image_items"))){
+                criteria.andLike("image_items","%"+searchMap.get("image_items")+"%");
+           	}
+
+
         }
-
-        List<Album> albums = albumMapper.selectByExample(example);
-        return (Page) albums;
+        return example;
     }
-
 
 }

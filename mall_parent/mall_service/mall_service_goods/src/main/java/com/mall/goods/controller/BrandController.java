@@ -1,70 +1,107 @@
 package com.mall.goods.controller;
-
 import com.github.pagehelper.Page;
 import com.mall.entity.PageResult;
 import com.mall.entity.Result;
 import com.mall.entity.StatusCode;
 import com.mall.goods.service.BrandService;
-import com.mall.pojo.Album;
 import com.mall.pojo.Brand;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
 import java.util.Map;
-
-/**
- * @author ：hodor007
- * @date ：Created in 2020/12/22
- * @description ：
- * @version: 1.0
- */
 @RestController
+@CrossOrigin
 @RequestMapping("/brand")
 public class BrandController {
+
+
     @Autowired
     private BrandService brandService;
 
-    //Restful风格的接口不能允许所有的类型
-//    @RequestMapping(value = "/findAll", method = RequestMethod.GET)
-    @GetMapping("/findAll")    //和上面的效果相同
+    /**
+     * 查询全部数据
+     * @return
+     */
+    @GetMapping
     public Result findAll(){
         List<Brand> brandList = brandService.findAll();
-        return new Result(true, StatusCode.OK, "查询品牌成功", brandList);
+        return new Result(true, StatusCode.OK,"查询成功",brandList) ;
     }
 
+    /***
+     * 根据ID查询数据
+     * @param id
+     * @return
+     */
     @GetMapping("/{id}")
     public Result findById(@PathVariable Integer id){
         Brand brand = brandService.findById(id);
-        return new Result(true, StatusCode.OK, "查询品牌成功", brand);
+        return new Result(true,StatusCode.OK,"查询成功",brand);
     }
 
-    //添加品牌
-    @PostMapping("/add")
-    public Result add(@RequestBody Brand brand){    //json转为对象
+
+    /***
+     * 新增数据
+     * @param brand
+     * @return
+     */
+    @PostMapping
+    public Result add(@RequestBody Brand brand){
         brandService.add(brand);
-        return new Result(true, StatusCode.OK, "添加成功");
+        return new Result(true,StatusCode.OK,"添加成功");
     }
 
-    //更新品牌
-    @PutMapping("/update")
-    public Result update(@RequestBody Brand brand){
+
+    /***
+     * 修改数据
+     * @param brand
+     * @param id
+     * @return
+     */
+    @PutMapping(value="/{id}")
+    public Result update(@RequestBody Brand brand,@PathVariable Integer id){
+        brand.setId(id);
         brandService.update(brand);
-        return new Result(true, StatusCode.OK, "修改品牌(单个)成功");
+        return new Result(true,StatusCode.OK,"修改成功");
     }
 
-    //删除品牌
-    @DeleteMapping("/{id}")
+
+    /***
+     * 根据ID删除品牌数据
+     * @param id
+     * @return
+     */
+    @DeleteMapping(value = "/{id}" )
     public Result delete(@PathVariable Integer id){
         brandService.delete(id);
-        return new Result(true, StatusCode.OK, "删除品牌(单个)成功");
+        return new Result(true,StatusCode.OK,"删除成功");
     }
 
-    @GetMapping("/searchPage/{pageNo}/{pageSize}")
-    public Result searchPage(@RequestParam Map<String, String> searchMap,@PathVariable Integer pageNo, @PathVariable Integer pageSize){
-        Page page = brandService.searchPage(searchMap, pageNo, pageSize);
-        PageResult pageResult = new PageResult(page.getTotal(), page.getResult());
-        return new Result(true, StatusCode.OK, "分页查询成功", pageResult);
+    /***
+     * 多条件搜索品牌数据
+     * @param searchMap
+     * @return
+     */
+    @GetMapping(value = "/search" )
+    public Result findList(@RequestParam Map searchMap){
+        List<Brand> list = brandService.findList(searchMap);
+        return new Result(true,StatusCode.OK,"查询成功",list);
     }
+
+
+    /***
+     * 分页搜索实现
+     * @param searchMap
+     * @param page
+     * @param size
+     * @return
+     */
+    @GetMapping(value = "/search/{page}/{size}" )
+    public Result findPage(@RequestParam Map searchMap, @PathVariable  int page, @PathVariable  int size){
+        Page<Brand> pageList = brandService.findPage(searchMap, page, size);
+        PageResult pageResult=new PageResult(pageList.getTotal(),pageList.getResult());
+        return new Result(true,StatusCode.OK,"查询成功",pageResult);
+    }
+
 
 }

@@ -12,6 +12,11 @@
     <packaging>pom</packaging>
     <modules>
         <module>mall_service_goods_api</module>
+        <module>mall_service_bussiness_api</module>
+        <module>mall_service_config_api</module>
+        <module>mall_service_order_api</module>
+        <module>mall_service_system_api</module>
+        <module>mall_service_user_api</module>
     </modules>
 
     <dependencies>

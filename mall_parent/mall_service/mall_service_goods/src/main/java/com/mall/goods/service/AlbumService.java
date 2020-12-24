@@ -2,27 +2,68 @@ package com.mall.goods.service;
 
 import com.github.pagehelper.Page;
 import com.mall.pojo.Album;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
+import java.util.Map;
 
-/**
- * @author ：XXXX
- * @date ：Created in 2020/12/23
- * @description ：
- * @version: 1.0
- */
 public interface AlbumService {
+
+    /***
+     * 查询所有
+     * @return
+     */
     List<Album> findAll();
 
-    Album findById(Integer id);
+    /**
+     * 根据ID查询
+     * @param id
+     * @return
+     */
+    Album findById(Long id);
 
-    Integer add(Album album);
+    /***
+     * 新增
+     * @param album
+     */
+    void add(Album album);
 
-    Integer delete(Integer id);
+    /***
+     * 修改
+     * @param album
+     */
+    void update(Album album);
 
-    Integer update(Album album);
+    /***
+     * 删除
+     * @param id
+     */
+    void delete(Long id);
 
-    Page searchAlbum(String name, Integer pageNo, Integer pageSize);
+    /***
+     * 多条件搜索
+     * @param searchMap
+     * @return
+     */
+    List<Album> findList(Map<String, Object> searchMap);
+
+    /***
+     * 分页查询
+     * @param page
+     * @param size
+     * @return
+     */
+    Page<Album> findPage(int page, int size);
+
+    /***
+     * 多条件分页查询
+     * @param searchMap
+     * @param page
+     * @param size
+     * @return
+     */
+    Page<Album> findPage(Map<String, Object> searchMap, int page, int size);
+
+
+
+
 }

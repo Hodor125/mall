@@ -14,6 +14,9 @@
         <module>mall_eureka</module>
         <module>mall_service</module>
         <module>mall_service_api</module>
+        <module>mall_canal</module>
+        <module>mall_gateway</module>
+        <module>mall_web</module>
     </modules>
 
     <parent>

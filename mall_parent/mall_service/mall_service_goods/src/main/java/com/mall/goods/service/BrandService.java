@@ -1,30 +1,69 @@
 package com.mall.goods.service;
 
 import com.github.pagehelper.Page;
-import com.mall.entity.Result;
 import com.mall.pojo.Brand;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 import java.util.Map;
 
-/**
- * @author ：XXXX
- * @date ：Created in 2020/12/22
- * @description ：
- * @version: 1.0
- */
 public interface BrandService {
+
+    /***
+     * 查询所有
+     * @return
+     */
     List<Brand> findAll();
 
+    /**
+     * 根据ID查询
+     * @param id
+     * @return
+     */
     Brand findById(Integer id);
 
-    Integer add(Brand brand);
+    /***
+     * 新增
+     * @param brand
+     */
+    void add(Brand brand);
 
-    Integer update(Brand brand);
+    /***
+     * 修改
+     * @param brand
+     */
+    void update(Brand brand);
 
-    Integer delete(Integer id);
+    /***
+     * 删除
+     * @param id
+     */
+    void delete(Integer id);
 
-    Page searchPage(Map<String, String> searchMap, Integer pageNo, Integer pageSize);
+    /***
+     * 多条件搜索
+     * @param searchMap
+     * @return
+     */
+    List<Brand> findList(Map<String, Object> searchMap);
+
+    /***
+     * 分页查询
+     * @param page
+     * @param size
+     * @return
+     */
+    Page<Brand> findPage(int page, int size);
+
+    /***
+     * 多条件分页查询
+     * @param searchMap
+     * @param page
+     * @param size
+     * @return
+     */
+    Page<Brand> findPage(Map<String, Object> searchMap, int page, int size);
+
+
+
+
 }
