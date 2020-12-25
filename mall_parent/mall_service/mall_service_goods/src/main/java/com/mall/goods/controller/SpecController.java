@@ -103,5 +103,9 @@ public class SpecController {
         return new Result(true,StatusCode.OK,"查询成功",pageResult);
     }
 
-
+    @GetMapping("/cate/{cateName}")
+    public Result findSpecByCateName(@PathVariable String cateName){
+        List<Spec> specList = specService.findSpecByCateName(cateName);
+        return new Result(true, StatusCode.OK, "根据分类查询规格成功", specList);
+    }
 }

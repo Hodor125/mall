@@ -5,7 +5,7 @@ spring:
     name: goods
   datasource:
     driver-class-name: com.mysql.jdbc.Driver
-    url: jdbc:mysql://192.168.153.124:3306/changgou_goods?useUnicode=true&characterEncoding=UTF-8&serverTimezone=UTC
+    url: jdbc:mysql://192.168.200.128:3306/changgou_goods?useUnicode=true&characterEncoding=UTF-8&serverTimezone=UTC&AutoReconnect=true
     username: root
     password: root
   main:

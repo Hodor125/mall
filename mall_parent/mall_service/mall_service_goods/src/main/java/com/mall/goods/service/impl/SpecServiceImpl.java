@@ -104,6 +104,7 @@ public class SpecServiceImpl implements SpecService {
         return (Page<Spec>)specMapper.selectByExample(example);
     }
 
+
     /**
      * 构建查询对象
      * @param searchMap
@@ -137,6 +138,16 @@ public class SpecServiceImpl implements SpecService {
 
         }
         return example;
+    }
+
+    /**
+     * 根据分类查询规格
+     * @param cateName
+     * @return
+     */
+    @Override
+    public List<Spec> findSpecByCateName(String cateName) {
+        return specMapper.findSpecByCateName(cateName);
     }
 
 }

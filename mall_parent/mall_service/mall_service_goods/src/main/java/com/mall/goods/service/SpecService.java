@@ -2,6 +2,7 @@ package com.mall.goods.service;
 
 import com.github.pagehelper.Page;
 import com.mall.pojo.Spec;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 import java.util.Map;
@@ -64,6 +65,11 @@ public interface SpecService {
     Page<Spec> findPage(Map<String, Object> searchMap, int page, int size);
 
 
-
+    /**
+     * 根据条件查询规格
+     * @param cateName
+     * @return
+     */
+    List<Spec> findSpecByCateName(String cateName);
 
 }

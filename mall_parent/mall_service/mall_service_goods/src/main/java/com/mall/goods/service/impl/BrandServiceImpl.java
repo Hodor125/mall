@@ -104,6 +104,7 @@ public class BrandServiceImpl implements BrandService {
         return (Page<Brand>)brandMapper.selectByExample(example);
     }
 
+
     /**
      * 构建查询对象
      * @param searchMap
@@ -139,4 +140,8 @@ public class BrandServiceImpl implements BrandService {
         return example;
     }
 
+    @Override
+    public List<Brand> findBrandByCateName(String cateName) {
+        return brandMapper.findBrandByCateName(cateName);
+    }
 }

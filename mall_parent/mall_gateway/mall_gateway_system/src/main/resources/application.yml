@@ -1,0 +1,39 @@
+spring:
+  application:
+    name: sysgateway
+  cloud:
+    gateway:
+      globalcors:
+        cors-configurations:
+          '[/**]': # 匹配所有请求
+            allowedOrigins: "*" #跨域处理 允许所有的域
+            allowedMethods: # 支持的方法
+              - GET
+              - POST
+              - PUT
+              - DELETE
+      routes:
+        #没有限定随便叫什么 -代表数组
+        - id: goods
+          #loadbalance负载均衡 底层使用的是ribbon
+          uri: lb://goods
+          #断言
+          predicates:
+            - Path=/goods/**
+          #跟路径后面截取一位
+          filters:
+            - StripPrefix= 1
+        - id: system
+          uri: lb://system
+          predicates:
+            - Path=/system/**
+          filters:
+            - StripPrefix= 1
+server:
+  port: 9101
+eureka:
+  client:
+    service-url:
+      defaultZone: http://127.0.0.1:6868/eureka
+  instance:
+    prefer-ip-address: true

@@ -18,5 +18,6 @@
         <module>mall_service_order</module>
         <module>mall_service_system</module>
         <module>mall_service_user</module>
+        <module>mall_service_file</module>
     </modules>
 </project>
