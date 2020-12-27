@@ -5,10 +5,16 @@ import com.mall.entity.Result;
 import com.mall.entity.StatusCode;
 import com.mall.system.pojo.Admin;
 import com.mall.system.service.AdminService;
+import com.mall.system.util.JwtUtil;
+import io.netty.util.internal.StringUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
+
 @RestController
 @CrossOrigin
 @RequestMapping("/admin")
@@ -103,5 +109,26 @@ public class AdminController {
         return new Result(true,StatusCode.OK,"查询成功",pageResult);
     }
 
+    @PostMapping("/login")
+    public Result login(@RequestBody Admin admin){
+        if(StringUtil.isNullOrEmpty(admin.getLoginName())){
+            return new Result(false, StatusCode.LOGINERROR, "用户名为空");
+        }
+
+        if(StringUtil.isNullOrEmpty(admin.getPassword())){
+            return new Result(false, StatusCode.LOGINERROR, "密码为空");
+        }
+
+        boolean res = adminService.login(admin);
+        if(res){
+            String token = JwtUtil.createJWT(UUID.randomUUID().toString(), admin.getLoginName(), null);
+            Map<String, String> userinfo = new HashMap<>();
+            userinfo.put("username",admin.getLoginName());
+            userinfo.put("token", token);
+            return new Result(true, StatusCode.OK, "登录成功",userinfo);
+        } else {
+            return new Result(false, StatusCode.LOGINERROR, "登录失败，用户名或者密码错误");
+        }
+    }
 
 }

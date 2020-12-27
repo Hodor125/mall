@@ -6,7 +6,9 @@ import com.mall.system.dao.AdminMapper;
 import com.mall.system.pojo.Admin;
 import com.mall.system.service.AdminService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 import tk.mybatis.mapper.entity.Example;
 
 import java.util.List;
@@ -44,7 +46,11 @@ public class AdminServiceImpl implements AdminService {
      */
     @Override
     public void add(Admin admin){
-        adminMapper.insert(admin);
+        String oriPass = admin.getPassword();
+        String hashpw = BCrypt.hashpw(oriPass,BCrypt.gensalt());
+        admin.setPassword(hashpw);
+        admin.setStatus("1");
+        adminMapper.insertSelective(admin);
     }
 
 
@@ -54,7 +60,7 @@ public class AdminServiceImpl implements AdminService {
      */
     @Override
     public void update(Admin admin){
-        adminMapper.updateByPrimaryKey(admin);
+        adminMapper.updateByPrimaryKeySelective(admin);
     }
 
     /**
@@ -104,6 +110,7 @@ public class AdminServiceImpl implements AdminService {
         return (Page<Admin>)adminMapper.selectByExample(example);
     }
 
+
     /**
      * 构建查询对象
      * @param searchMap
@@ -135,4 +142,25 @@ public class AdminServiceImpl implements AdminService {
         return example;
     }
 
+    @Override
+    public boolean login(Admin admin) {
+        //根据用户名查询数据库
+        Example example = new Example(Admin.class);
+        Example.Criteria criteria = example.createCriteria();
+        criteria.andEqualTo("loginName", admin.getLoginName());
+
+        List<Admin> admins = adminMapper.selectByExample(example);
+        Admin dbAdmin = admins.get(0);
+        //如果查不到数据则返回失败
+        if(dbAdmin == null){
+            return false;
+        }
+
+        //对比密码
+        if(!StringUtils.isEmpty(dbAdmin.getPassword())){
+            return BCrypt.checkpw(admin.getPassword(), dbAdmin.getPassword());
+        } else {
+            return false;
+        }
+    }
 }

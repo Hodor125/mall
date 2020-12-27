@@ -11,6 +11,12 @@
     <artifactId>mall_service_system</artifactId>
 
     <dependencies>
+        <!--jwt依赖导入-->
+        <dependency>
+            <groupId>io.jsonwebtoken</groupId>
+            <artifactId>jjwt</artifactId>
+            <version>0.9.0</version>
+        </dependency>
         <dependency>
             <groupId>com.mall</groupId>
             <artifactId>mall_common_db</artifactId>
