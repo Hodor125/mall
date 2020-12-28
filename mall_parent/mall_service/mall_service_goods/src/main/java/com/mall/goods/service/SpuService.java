@@ -1,7 +1,9 @@
 package com.mall.goods.service;
 
 import com.github.pagehelper.Page;
+import com.mall.pojo.Goods;
 import com.mall.pojo.Spu;
+import org.springframework.web.bind.annotation.PathVariable;
 
 import java.util.List;
 import java.util.Map;
@@ -64,6 +66,52 @@ public interface SpuService {
     Page<Spu> findPage(Map<String, Object> searchMap, int page, int size);
 
 
+    /**
+     * 添加商品，修改spu和sku表
+     * @param goods
+     */
+    void addGoods(Goods goods);
 
 
+    /**
+     * 更新商品
+     * @param goods
+     */
+    void updateGoods(Goods goods);
+
+    /**
+     * 审核商品
+     * @param spuId
+     */
+    void auditGoods(String spuId);
+
+    /**
+     * 商家商品，前提是审核通过
+     * @param spuId
+     */
+    void upGoods(String spuId);
+
+    /**
+     * 下架商品
+     * @param spuId
+     */
+    void downGoods(String spuId);
+
+    /**
+     * 逻辑删除商品
+     * @param spuId
+     */
+    void logicDelete(String spuId);
+
+    /**
+     * 恢复商品
+     * @param spuId
+     */
+    void restore(String spuId);
+
+    /**
+     * 物理删除
+     * @param spuId
+     */
+    void deleteReal(String spuId);
 }

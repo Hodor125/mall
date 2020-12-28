@@ -4,10 +4,12 @@ import com.mall.entity.PageResult;
 import com.mall.entity.Result;
 import com.mall.entity.StatusCode;
 import com.mall.goods.service.SpuService;
+import com.mall.pojo.Goods;
 import com.mall.pojo.Spu;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.nio.file.Path;
 import java.util.List;
 import java.util.Map;
 @RestController
@@ -104,5 +106,86 @@ public class SpuController {
         return new Result(true,StatusCode.OK,"查询成功",pageResult);
     }
 
+    /**
+     * 添加商品(spu和sku)
+     * @param goods
+     * @return
+     */
+    @PostMapping("/addGoods")
+    public Result addGoods(@RequestBody Goods goods){
+        spuService.addGoods(goods);
+        return new Result(true, StatusCode.OK, "添加商品成功");
+    }
 
+    /**
+     * 更新商品
+     * @param goods
+     * @return
+     */
+    @PostMapping("/updateGoods")
+    public Result updateGoods(@RequestBody Goods goods){
+        spuService.updateGoods(goods);
+        return new Result(true, StatusCode.OK, "更新商品成功");
+    }
+
+    /**
+     * 审核商品
+     * @param spuId
+     * @return
+     */
+    @PostMapping("/auditGoods/{spuId}")
+    public Result auditGoods(@PathVariable String spuId){
+        spuService.auditGoods(spuId);
+        return new Result(true, StatusCode.OK, "审核商品通过");
+    }
+
+    /**
+     * 商品上架
+     * @param spuId
+     * @return
+     */
+    @PostMapping("/upGoods/{spuId}")
+    public Result upGoods(@PathVariable String spuId){
+        spuService.upGoods(spuId);
+        return new Result(true, StatusCode.OK, "商品上架成功");
+    }
+
+    /**
+     * 下架商品
+     * @param spuId
+     * @return
+     */
+    @PostMapping("/downGoods/{spuId}")
+    public Result downGoods(@PathVariable String spuId){
+        spuService.downGoods(spuId);
+        return new Result(true, StatusCode.OK, "下架商品成功");
+    }
+
+    /**
+     * 逻辑删除商品
+     * @param spuId
+     * @return
+     */
+    @PostMapping("/logicDelete/{spuId}")
+    public Result logicDelete(@PathVariable String spuId){
+        spuService.logicDelete(spuId);
+        return new Result(true, StatusCode.OK, "逻辑删除商品成功");
+    }
+
+    @PostMapping("/restore/{spuId}")
+    public Result restore(@PathVariable String spuId){
+        spuService.restore(spuId);
+        return new Result(true, StatusCode.OK, "恢复商品成功");
+    }
+
+    /**
+     * 物理删除
+     * @param spuId
+     * @return
+     */
+    @PostMapping("/deleteReal/{spuId}")
+    public Result deleteReal(@PathVariable String spuId){
+        spuService.deleteReal(spuId);
+        return new Result(true, StatusCode.OK, "物理删除成功");
+    }
 }

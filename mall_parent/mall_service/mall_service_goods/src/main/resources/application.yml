@@ -38,3 +38,9 @@ hystrix:
             # 熔断器超时时间，默认：1000/毫秒
             timeoutInMilliseconds: 20000
 
+datacenterId: 0
+workerId: 0
+
+mybatis:
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
