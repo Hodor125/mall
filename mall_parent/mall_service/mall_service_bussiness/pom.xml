@@ -13,6 +13,15 @@
 
     <dependencies>
         <dependency>
+            <groupId>org.springframework.amqp</groupId>
+            <artifactId>spring-rabbit</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.squareup.okhttp3</groupId>
+            <artifactId>okhttp</artifactId>
+            <version>3.9.0</version>
+        </dependency>
+        <dependency>
             <groupId>com.mall</groupId>
             <artifactId>mall_common_db</artifactId>
             <version>1.0-SNAPSHOT</version>
