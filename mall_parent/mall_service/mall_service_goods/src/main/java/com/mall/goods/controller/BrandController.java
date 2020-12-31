@@ -4,7 +4,7 @@ import com.mall.entity.PageResult;
 import com.mall.entity.Result;
 import com.mall.entity.StatusCode;
 import com.mall.goods.service.BrandService;
-import com.mall.pojo.Brand;
+import com.mall.goods.pojo.Brand;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;

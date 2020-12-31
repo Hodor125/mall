@@ -1,4 +1,4 @@
-package com.mall.pojo;
+package com.mall.goods.pojo;
 
 import java.io.Serializable;
 import java.util.List;

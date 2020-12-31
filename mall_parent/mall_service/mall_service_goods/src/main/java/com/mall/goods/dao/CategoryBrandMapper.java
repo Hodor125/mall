@@ -1,6 +1,6 @@
 package com.mall.goods.dao;
 
-import com.mall.pojo.CategoryBrand;
+import com.mall.goods.pojo.CategoryBrand;
 import tk.mybatis.mapper.common.Mapper;
 
 /**

@@ -4,7 +4,7 @@ import com.mall.entity.PageResult;
 import com.mall.entity.Result;
 import com.mall.entity.StatusCode;
 import com.mall.goods.service.TemplateService;
-import com.mall.pojo.Template;
+import com.mall.goods.pojo.Template;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;

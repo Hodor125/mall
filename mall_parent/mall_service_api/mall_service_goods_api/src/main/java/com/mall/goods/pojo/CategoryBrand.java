@@ -1,4 +1,4 @@
-package com.mall.pojo;
+package com.mall.goods.pojo;
 
 import javax.persistence.Id;
 import javax.persistence.Table;

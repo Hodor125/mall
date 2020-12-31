@@ -1,7 +1,7 @@
 package com.mall.goods.service;
 
 import com.github.pagehelper.Page;
-import com.mall.pojo.Template;
+import com.mall.goods.pojo.Template;
 
 import java.util.List;
 import java.util.Map;

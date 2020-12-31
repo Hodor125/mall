@@ -4,7 +4,7 @@ import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import com.mall.goods.dao.SkuMapper;
 import com.mall.goods.service.SkuService;
-import com.mall.pojo.Sku;
+import com.mall.goods.pojo.Sku;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import tk.mybatis.mapper.entity.Example;

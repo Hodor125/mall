@@ -1,9 +1,8 @@
 package com.mall.goods.service;
 
 import com.github.pagehelper.Page;
-import com.mall.pojo.Goods;
-import com.mall.pojo.Spu;
-import org.springframework.web.bind.annotation.PathVariable;
+import com.mall.goods.pojo.Goods;
+import com.mall.goods.pojo.Spu;
 
 import java.util.List;
 import java.util.Map;

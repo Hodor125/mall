@@ -4,7 +4,7 @@ import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import com.mall.goods.dao.BrandMapper;
 import com.mall.goods.service.BrandService;
-import com.mall.pojo.Brand;
+import com.mall.goods.pojo.Brand;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import tk.mybatis.mapper.entity.Example;

@@ -1,6 +1,6 @@
 package com.mall.goods.dao;
 
-import com.mall.pojo.Spec;
+import com.mall.goods.pojo.Spec;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 import tk.mybatis.mapper.common.Mapper;

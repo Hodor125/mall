@@ -12,6 +12,11 @@
     <artifactId>mall_service_goods</artifactId>
 
     <dependencies>
+        <!--导入mq依赖-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-amqp</artifactId>
+        </dependency>
         <dependency>
             <groupId>com.mall</groupId>
             <artifactId>mall_common_db</artifactId>

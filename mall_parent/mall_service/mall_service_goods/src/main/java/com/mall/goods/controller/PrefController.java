@@ -4,7 +4,7 @@ import com.mall.entity.PageResult;
 import com.mall.entity.Result;
 import com.mall.entity.StatusCode;
 import com.mall.goods.service.PrefService;
-import com.mall.pojo.Pref;
+import com.mall.goods.pojo.Pref;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;

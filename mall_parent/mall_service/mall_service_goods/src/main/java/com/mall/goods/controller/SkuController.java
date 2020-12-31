@@ -3,10 +3,13 @@ import com.github.pagehelper.Page;
 import com.mall.entity.PageResult;
 import com.mall.entity.Result;
 import com.mall.entity.StatusCode;
+import com.mall.goods.pojo.Spu;
 import com.mall.goods.service.SkuService;
-import com.mall.pojo.Sku;
+import com.mall.goods.pojo.Sku;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 @RestController
@@ -103,5 +106,11 @@ public class SkuController {
         return new Result(true,StatusCode.OK,"查询成功",pageResult);
     }
 
-
+    @GetMapping("findBySpuId/{spuId}")
+    public List<Sku> findBySpuId(@PathVariable String spuId){
+        Map<String, Object> searchMap = new HashMap<>();
+        searchMap.put("spuId", spuId);
+        List<Sku> skuList = skuService.findList(searchMap);
+        return skuList;
+    }
 }

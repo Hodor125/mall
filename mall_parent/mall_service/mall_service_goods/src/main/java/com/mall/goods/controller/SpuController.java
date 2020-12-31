@@ -3,13 +3,13 @@ import com.github.pagehelper.Page;
 import com.mall.entity.PageResult;
 import com.mall.entity.Result;
 import com.mall.entity.StatusCode;
+import com.mall.goods.pojo.Sku;
 import com.mall.goods.service.SpuService;
-import com.mall.pojo.Goods;
-import com.mall.pojo.Spu;
+import com.mall.goods.pojo.Goods;
+import com.mall.goods.pojo.Spu;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.nio.file.Path;
 import java.util.List;
 import java.util.Map;
 @RestController

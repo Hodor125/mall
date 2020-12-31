@@ -17,6 +17,7 @@
         <module>mall_service_order_api</module>
         <module>mall_service_system_api</module>
         <module>mall_service_user_api</module>
+        <module>mall_service_api_search</module>
     </modules>
 
     <dependencies>

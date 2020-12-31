@@ -4,7 +4,7 @@ import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import com.mall.goods.dao.LogMapper;
 import com.mall.goods.service.LogService;
-import com.mall.pojo.Log;
+import com.mall.goods.pojo.Log;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import tk.mybatis.mapper.entity.Example;

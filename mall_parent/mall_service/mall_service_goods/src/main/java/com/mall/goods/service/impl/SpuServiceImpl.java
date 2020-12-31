@@ -4,11 +4,11 @@ import com.alibaba.fastjson.JSON;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import com.mall.goods.dao.*;
+import com.mall.goods.pojo.*;
 import com.mall.goods.service.SpuService;
-import com.mall.pojo.*;
 import com.mall.util.IdWorker;
-import com.netflix.discovery.converters.Auto;
 import io.netty.util.internal.StringUtil;
+import org.springframework.amqp.rabbit.core.RabbitMessagingTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -33,6 +33,8 @@ public class SpuServiceImpl implements SpuService {
     private CategoryBrandMapper categoryBrandMapper;
     @Autowired
     private SkuMapper skuMapper;
+    @Autowired
+    private RabbitMessagingTemplate messagingTemplate;
 
     /**
      * 查询全部列表
@@ -247,6 +249,9 @@ public class SpuServiceImpl implements SpuService {
             //3 修改状态并保存
             spu.setIsMarketable("1");
             spuMapper.updateByPrimaryKeySelective(spu);
+
+            //4 发送消息给rabbitmq
+            messagingTemplate.convertAndSend("goods_up_exchange","",spuId);
         } else {
             throw new RuntimeException("spuId为空");
         }
@@ -271,6 +276,9 @@ public class SpuServiceImpl implements SpuService {
             //3 修改状态写入数据库
             spu.setIsMarketable("0");
             spuMapper.updateByPrimaryKeySelective(spu);
+            //4 消息发送到mq中
+            messagingTemplate.convertAndSend("goods_down_exchange","",spuId);
+
         } else {
             throw new RuntimeException("spuId为空");
         }

@@ -4,7 +4,7 @@ import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import com.mall.goods.dao.SpecMapper;
 import com.mall.goods.service.SpecService;
-import com.mall.pojo.Spec;
+import com.mall.goods.pojo.Spec;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import tk.mybatis.mapper.entity.Example;

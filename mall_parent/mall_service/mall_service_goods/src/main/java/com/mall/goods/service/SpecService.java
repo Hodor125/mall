@@ -1,8 +1,7 @@
 package com.mall.goods.service;
 
 import com.github.pagehelper.Page;
-import com.mall.pojo.Spec;
-import org.apache.ibatis.annotations.Param;
+import com.mall.goods.pojo.Spec;
 
 import java.util.List;
 import java.util.Map;
