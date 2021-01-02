@@ -67,10 +67,17 @@ public class EsManagerServiceImpl implements EsManagerService {
 
         //2 数据转为SKuInfo
         String allJSON = JSON.toJSONString(result.getData());
-        List<SkuInfo> skuInfos = JSON.parseArray(allJSON, SkuInfo.class);
+        List<SkuInfo> skuInfoList = JSON.parseArray(allJSON, SkuInfo.class);
+        //将spec转为specMap，spec是字符串
+        if(skuInfoList != null && skuInfoList.size() > 0){
+            for (SkuInfo skuInfo : skuInfoList) {
+                Map map = JSON.parseObject(skuInfo.getSpec(), Map.class);
+                skuInfo.setSpecMap(map);
+            }
+        }
 
         //3 将数据导入es
-        esManagerMapper.saveAll(skuInfos);
+        esManagerMapper.saveAll(skuInfoList);
     }
 
     //删除对应spuId的es数据
