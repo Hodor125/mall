@@ -56,13 +56,13 @@ public class EsSearchServiceImpl implements EsSearchService {
 
         //需求1：根据搜索关键词进行搜索（模糊搜索）
         //must相当于and should相当于or mustNot相当于not，后面还要指定AND
-        if(!StringUtil.isNullOrEmpty(searchMap.get("keyWords"))){
-            boolQueryBuilder.must(QueryBuilders.matchQuery("name",searchMap.get("keyWords")).operator(Operator.AND));
+        if(!StringUtil.isNullOrEmpty(searchMap.get("keywords"))){
+            boolQueryBuilder.must(QueryBuilders.matchQuery("name",searchMap.get("keywords")).operator(Operator.AND));
         }
 
         //需求5 根据品牌精确查询 类似于mysql的select * from tb_sku where brand_name=""
-        if(!StringUtil.isNullOrEmpty(searchMap.get("brandName"))){
-            boolQueryBuilder.filter(QueryBuilders.termQuery("brandName",searchMap.get("brandName")));
+        if(!StringUtil.isNullOrEmpty(searchMap.get("brand"))){
+            boolQueryBuilder.filter(QueryBuilders.termQuery("brandName",searchMap.get("brand")));
         }
 
         //需求6 根据分类进行精确搜索    相当于mysql的select * from tb_sku where categoryName = ""
@@ -114,15 +114,15 @@ public class EsSearchServiceImpl implements EsSearchService {
         nativeSearchQueryBuilder.addAggregation(specGroupBuilder);
 
         //需求9 对结果进行分页    类似于mysql中的select * from tb_sku limit n,m
-        int pageNo = 1;
+        int  pageNum= 1;
         int pageSize = 10;
-        if(!StringUtil.isNullOrEmpty(searchMap.get("pageNo"))){
-            pageNo = Integer.valueOf(searchMap.get("pageNo"));
+        if(!StringUtil.isNullOrEmpty(searchMap.get("pageNum"))){
+            pageNum = Integer.valueOf(searchMap.get("pageNum"));
         }
         if(!StringUtil.isNullOrEmpty(searchMap.get("pageSize"))){
             pageSize = Integer.valueOf(searchMap.get("pageSize"));
         }
-        nativeSearchQueryBuilder.withPageable(PageRequest.of(pageNo - 1, pageSize));
+        nativeSearchQueryBuilder.withPageable(PageRequest.of(pageNum - 1, pageSize));
 
         //需求10 对搜索的结果进行排序    类似于select * from tb_sku order by price desc|asc
         if(!StringUtil.isNullOrEmpty(searchMap.get("sortField")) && !StringUtil.isNullOrEmpty(searchMap.get("sortRule"))){
@@ -213,7 +213,8 @@ public class EsSearchServiceImpl implements EsSearchService {
         result.put("totealPage", searchResult.getTotalPages());
         result.put("brandList", brandList);    //返回格式 ['','','']
         result.put("cateList", cateList);
-        result.put("specMap",specMap);
+        result.put("specList",specMap);
+        result.put("pageNum",pageNum);
         return result;
     }
 }
