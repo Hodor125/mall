@@ -13,6 +13,7 @@
     <packaging>pom</packaging>
     <modules>
         <module>mall_gateway_system</module>
+        <module>mall_gateway_web</module>
     </modules>
 
     <!--网关依赖-->

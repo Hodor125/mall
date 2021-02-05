@@ -17,6 +17,7 @@
         <module>mall_canal</module>
         <module>mall_gateway</module>
         <module>mall_web</module>
+        <module>mall_user_oauth</module>
     </modules>
 
     <parent>

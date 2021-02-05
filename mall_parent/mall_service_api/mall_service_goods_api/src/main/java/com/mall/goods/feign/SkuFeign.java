@@ -21,4 +21,7 @@ public interface SkuFeign {
 
     @GetMapping
     public Result findAll();
+
+    @GetMapping("/{id}")
+    public Sku findById(@PathVariable("id") String id);
 }

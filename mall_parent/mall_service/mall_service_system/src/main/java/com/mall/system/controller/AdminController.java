@@ -130,5 +130,4 @@ public class AdminController {
             return new Result(false, StatusCode.LOGINERROR, "登录失败，用户名或者密码错误");
         }
     }
-
 }

@@ -15,7 +15,7 @@ import reactor.core.publisher.Mono;
  * @version: 1.0
  */
 @Component
-public class URLFilter implements GlobalFilter, Ordered {
+public class    URLFilter implements GlobalFilter, Ordered {
     @Override
     public Mono<Void> filter(ServerWebExchange exchange, GatewayFilterChain chain) {
         //获取url

@@ -300,7 +300,7 @@ public class SpuServiceImpl implements SpuService {
             if("1".equals(spu.getIsMarketable())){
                 throw new RuntimeException("已上架的商品不能删除");
             }
-            //3 修改删除状态和审核状态，写入数据库
+            //3 修改删除状态和上架状态，写入数据库
             spu.setIsMarketable("0");
             spu.setIsDelete("1");
             spuMapper.updateByPrimaryKeySelective(spu);

@@ -25,5 +25,10 @@
             <artifactId>mall_service_order_api</artifactId>
             <version>1.0-SNAPSHOT</version>
         </dependency>
+        <dependency>
+            <groupId>com.mall</groupId>
+            <artifactId>mall_service_goods_api</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
     </dependencies>
 </project>

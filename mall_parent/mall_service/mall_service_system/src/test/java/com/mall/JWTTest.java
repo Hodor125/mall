@@ -51,7 +51,7 @@ public class JWTTest {
         //设置动态的载荷生成的内容才会有所不同
         //生成的jwt包含三部分 头部 载荷 头部和载荷的组合
         String jwt = Jwts.builder().signWith(SignatureAlgorithm.HS256, secret)    //设置头部和算法签名
-                .setId(UUID.randomUUID().toString())    //设置jwt的唯一id标识，载荷的内容    动态载荷
+                .setId(UUID.randomUUID().toString())    //设置jwt的唯一id标识，载荷的内容    动态载荷    即jti
                 .setSubject("黑色五叶草")    //设置jwt的主题
                 .setIssuedAt(new Date())    //设置jwt的系统时间    动态载荷
                 .claim("username","zhangsan")    //设置自定义属性 用户名
@@ -65,9 +65,9 @@ public class JWTTest {
 //    @Test
     public void parseJwt(){
         String secret = "ahucom";
-        String jwt = "eyJhbGciOiJIUzI1NiJ9.eyJqdGkiOiIzMDQwZGRhMi1iNmMyLTRkZTUtYTY0Ny1jZTdjMjk0NGJmZWMiLCJzdW" +
-                "IiOiLpu5HoibLkupTlj7bojYkiLCJpYXQiOjE2MDg5OTE3NzEsInVzZXJuYW1lIjoiemhhbmdzYW4iLCJhZ2UiOjIzfQ.3mMDxv" +
-                "oVu9Fmce2OPabvQRd7UaEOemQelzKNFSd3c5o";
+        String jwt = "eyJhbGciOiJIUzI1NiJ9.eyJqdGkiOiJhNGRkZTI5Yy1jM2RmLTQ3ZjctOTQxOS1kYjI0ODliOGQ4MjUiLCJzdWIiOiLpu" +
+                "5HoibLkupTlj7bojYkiLCJpYXQiOjE2MTIxOTIzOTQsInVzZXJuYW1lIjoiemhhbmdzYW4iLCJhZ2UiOjIzfQ.Jgb1h4_IFF8K" +
+                "FTf1d2Pdb0NNx5lIzlnxV0t5RJIHmPg";
         Jws<Claims> claimsJws = Jwts.parser().setSigningKey(secret).parseClaimsJws(jwt);
         JwsHeader header = claimsJws.getHeader();
         Claims body = claimsJws.getBody();

@@ -6,6 +6,7 @@ import com.mall.entity.StatusCode;
 import com.mall.user.pojo.User;
 import com.mall.user.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.Map;
@@ -22,6 +23,7 @@ public class UserController {
      * 查询全部数据
      * @return
      */
+    @PreAuthorize("hasAnyAuthority('admin')")
     @GetMapping
     public Result findAll(){
         List<User> userList = userService.findAll();
@@ -37,6 +39,17 @@ public class UserController {
     public Result findById(@PathVariable String username){
         User user = userService.findById(username);
         return new Result(true,StatusCode.OK,"查询成功",user);
+    }
+
+    /**
+     * 直接返回user，作为feign接口调用
+     * @param username
+     * @return
+     */
+    @GetMapping("/load/{username}")
+    public User loadById(@PathVariable String username){
+        User user = userService.findById(username);
+        return user;
     }
 
 
